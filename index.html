@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Detection System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .scientific-bg {
+            background: linear-gradient(135deg, #1a365d 0%, #2d3748 100%);
+        }
+        .marker-active {
+            background-color: #f56565 !important;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen">
+        <!-- Header -->
+        <header class="scientific-bg text-white py-6 shadow-lg">
+            <div class="container mx-auto px-4">
+                <h1 class="text-3xl font-bold text-center">
+                    <i class="fas fa-brain mr-2"></i>
+                    Brain Tumor Detection System
+                </h1>
+                <p class="text-center mt-2 text-gray-300">Advanced Medical Image Analysis</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <div class="bg-white rounded-lg shadow-xl p-6">
+                <!-- Image Upload Container -->
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center mb-6" id="imageContainer">
+                    <div id="uploadPrompt">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-500">Drag & drop your brain scan image or</p>
+                        <button class="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 transition-colors">
+                            Choose File
+                        </button>
+                    </div>
+                    <img id="previewImage" class="max-w-full max-h-[400px] mx-auto hidden" />
+                    <canvas id="markerCanvas" class="absolute hidden"></canvas>
+                </div>
+
+                <!-- Controls -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <button id="processBtn" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors disabled:bg-gray-400" disabled>
+                        <i class="fas fa-play mr-2"></i>Process
+                    </button>
+                    <button id="markerBtn" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors disabled:bg-gray-400" disabled>
+                        <i class="fas fa-marker mr-2"></i>Marker
+                    </button>
+                    <button id="deleteBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors disabled:bg-gray-400" disabled>
+                        <i class="fas fa-trash mr-2"></i>Delete
+                    </button>
+                    <button id="cancelBtn" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors disabled:bg-gray-400" disabled>
+                        <i class="fas fa-times mr-2"></i>Cancel
+                    </button>
+                </div>
+
+                <!-- Progress and Result -->
+                <div class="space-y-4">
+                    <div id="progressContainer" class="hidden">
+                        <div class="h-2 bg-gray-200 rounded-full">
+                            <div id="progressBar" class="h-2 bg-blue-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                        <p id="processingTime" class="text-sm text-gray-500 mt-2">Processing time: 0s</p>
+                    </div>
+
+                    <div id="resultContainer" class="hidden bg-gray-50 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold mb-2">Analysis Result</h3>
+                        <p id="resultText" class="text-xl font-bold text-center py-2"></p>
+                        
+                        <!-- Feedback Section -->
+                        <div class="mt-4 border-t pt-4">
+                            <h4 class="text-md font-semibold mb-2">Provide Feedback</h4>
+                            <div class="flex gap-4">
+                                <select id="feedbackSelect" class="flex-1 border rounded-lg px-3 py-2">
+                                    <option value="">Select correct classification</option>
+                                    <option value="no_tumor">No Tumor</option>
+                                    <option value="tumor">Tumor</option>
+                                </select>
+                                <button id="submitFeedbackBtn" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                                    Submit Feedback
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
